@@ -403,27 +403,6 @@ class HUIRoot extends LitElement {
                                 </mwc-list-item>
                               `
                             : ""}
-                          ${this.hass!.user?.is_admin &&
-                          !this.hass!.config.safe_mode
-                            ? html`
-                                <mwc-list-item
-                                  graphic="icon"
-                                  aria-label=${this.hass!.localize(
-                                    "ui.panel.lovelace.menu.configure_ui"
-                                  )}
-                                  @request-selected=${this
-                                    ._handleEnableEditMode}
-                                >
-                                  ${this.hass!.localize(
-                                    "ui.panel.lovelace.menu.configure_ui"
-                                  )}
-                                  <ha-svg-icon
-                                    slot="graphic"
-                                    .path=${mdiPencil}
-                                  ></ha-svg-icon>
-                                </mwc-list-item>
-                              `
-                            : ""}
                           ${this._editMode
                             ? html`
                                 <a
@@ -674,7 +653,6 @@ class HUIRoot extends LitElement {
     return (
       (this.narrow && this._conversation(this.hass.config.components)) ||
       this._editMode ||
-      (this.hass!.user?.is_admin && !this.hass!.config.safe_mode) ||
       (this.hass.panels.lovelace?.config as LovelacePanelConfig)?.mode ===
         "yaml" ||
       this._yamlMode
